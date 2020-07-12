@@ -18,7 +18,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #00ccff;
+  background: black;
+  color: white;
 }
 
 main {
