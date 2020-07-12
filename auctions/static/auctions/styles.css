@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  font-size: 35px;
+}
+
+.usersearch {
+  display: flex;
+  justify-content: space-around;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #00ccff;
+}
+
+main {
+  padding: 10px;
+}
+
+@media (min-width: 767px) {
+  header {
+    height: 7vh;
+  }
+  header h3 {
+    font-size: 48px!important;
+  }
+
+  .usersearch {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 20px;
+    padding-right: 50px;
+  }
+
+  .search {
+    margin-left: auto;
+  }
+
+  .nav {
+    margin: auto;
+  }
+}

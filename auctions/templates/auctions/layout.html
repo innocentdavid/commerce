@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset=utf-8>
+  <meta name=description content="">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <title>{% block title %}Auctions{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="{% static 'auctions/script.js' %}"></script>
+</head>
+<body>
+  <header>
+    <h3 style="text-align: center;">
+      <small>e</small><span>AUCTION WITH DJANGO</span>
+    </h3>
+  </header>
+  <nav class="container-fluid">
+    <div class="row">
+      <div class="col-9 col-md-12">
+        <a href="">Innocent <i class="fa fa-user"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="col-3 col-md-12 nav">
+        <span class="nav ml-auto"><i class="fa fa-bars" style="margin-top: 8px"></i></span>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+
+  </div>
+  <main>
+    <h1>Auctions</h1>
+    <div>
+      {% if user.is_authenticated %}
+      Signed in as <strong>{{ user.username }}</strong>.
+      {% else %}
+      Not signed in.
+      {% endif %}
+    </div>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+    <hr>
+    {% block body %}
+    {% endblock %}
+  </main>
+</body>
+</html>
