@@ -14,6 +14,7 @@
   <script src="{% static 'auctions/script.js' %}"></script>
 </head>
 <body>
+  <div class="e_msgCont"><span class="e_msg"></span></div>
   <header>
     <h3 style="text-align: center;">
       <small>e</small><span>AUCTION WITH DJANGO</span>
@@ -23,7 +24,7 @@
     <div class="d-flex" style="justify-content: space-between; align-items: center;">
       <div style="text-align: center; ">
         {% if user.is_authenticated %}
-        Hi <strong><a style="text-transform: capitalize;" href="">{{ user.username }}</a></strong>.
+        Hi <strong><a style="text-transform: capitalize;" href="/">{{ user.username }}</a></strong>.
         {% else %}
         Not signed in.
         {% endif %}
@@ -35,14 +36,14 @@
             <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Categories</a>
+            <a class="nav-link" href="{% url 'categories' %}">Categories</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="">WatchList<span class="badge">6</span></a>
+            <a class="nav-link" href="{% url 'watchlist' %}">WatchList<span class="badge">6</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Create Listing</a>
+            <a class="nav-link" href="{% url 'createListing' %}">Create Listing</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Log Out</a>

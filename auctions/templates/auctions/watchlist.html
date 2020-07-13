@@ -1,0 +1,59 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
+<div>
+    <h2>MY WATCHLIST</h2>
+    <ul class="container">
+        <li class="row">
+            <div class="col-3">
+                <a href="listing?q=TITLE"><img src="https://cdn.mos.cms.futurecdn.net/ezKNonZhQxu2KXuHPq9cj7-970-80.jpg"
+                    alt="Dell XPS 13 (2020)" width="100%" height="100%"></a>
+            </div>
+            <ul class="col-9" style="list-style-type: none;">
+                <li>
+                    <a href="listing?q=TITLE">
+                        <h5 style="display: inline;">Dell XPS 13 (2020)</h5>
+                        <!-- <a href="/" class="btn-sm btn-danger">Close</a> -->
+                    </a>
+                </li>
+                <li>
+                    <h6>Current Bid $7,000.00</h6>
+                </li>
+                <li>
+                    <span class="btn-sm btn-secondary">Status <i class="fa fa-angle-double-right"></i> <strong>Open</strong></span>
+                    <!-- <span class="btn-sm btn-primary">See Winner</span> -->
+                    <span class="btn-sm btn-danger" style="cursor: pointer;">Cancel</span>
+                </li>
+            </ul>
+        </li>
+        <hr>
+        <br>
+        <li class="row">
+            <div class="col-3">
+                <a href="listing?q=TITLE"><img src="https://cdn.mos.cms.futurecdn.net/ezKNonZhQxu2KXuHPq9cj7-970-80.jpg"
+                    alt="Dell XPS 13 (2020)" width="100%" height="100%"></a>
+            </div>
+            <ul class="col-9" style="list-style-type: none;">
+                <li>
+                    <a href="listing?q=TITLE">
+                        <h5 style="display: inline;">Dell XPS 13 (2020)</h5>
+                        <!-- <a href="/" class="btn-sm btn-danger">Close</a> -->
+                    </a>
+                </li>
+                <li>
+                    <h6>Current Bid $7,000.00</h6>
+                </li>
+                <li>
+                    <span class="btn-sm btn-secondary">Status <i class="fa fa-angle-double-right"></i> <strong>Open</strong></span>
+                    <!-- <span class="btn-sm btn-primary">See Winner</span> -->
+                    <span class="btn-sm btn-danger" style="cursor: pointer;">Cancel</span>
+                </li>
+            </ul>
+        </li>
+        <hr>
+        <br>
+    </ul>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
+    <div>
+        <h2>Create Listing</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" id="category" class="form-control" required >
+                    <option value="">Select</option>
+                    <option value="category1">category1</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sbid">Starting Bid</label>
+                <input type="number" name="sbid" id="sbid" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" class="form-control" placeholder="Description here !" required ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imgUrl">image URL (Optional)</label>
+                <input type="text" name="imgUrl" id="imgUrl" class="form-control">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+{% endblock %}
