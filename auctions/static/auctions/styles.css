@@ -7,10 +7,10 @@
 nav {
   font-size: 35px;
 }
-
-.usersearch {
-  display: flex;
-  justify-content: space-around;
+.nav .badge {
+  background: #1793FF;
+  color: white;
+  border-radius: 50%;
 }
 
 header {
@@ -34,18 +34,7 @@ main {
     font-size: 48px!important;
   }
 
-  .usersearch {
-    display: flex;
-    justify-content: space-around;
-    padding-left: 20px;
-    padding-right: 50px;
-  }
-
-  .search {
-    margin-left: auto;
-  }
-
   .nav {
-    margin: auto;
+    /* margin: auto; */
   }
 }
