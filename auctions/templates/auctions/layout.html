@@ -21,6 +21,13 @@
   </header>
   <main>
     <div class="d-flex" style="justify-content: space-between; align-items: center; ">
+      <div style="text-align: center; ">
+        {% if user.is_authenticated %}
+        Hi <strong><a style="text-transform: capitalize;" href="">{{ user.username }}</a></strong>.
+        {% else %}
+        Not signed in.
+        {% endif %}
+      </div>
       <ul class="nav" style="">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
@@ -47,13 +54,6 @@
         </li>
         {% endif %}
       </ul>
-      <div style="text-align: center; ">
-        {% if user.is_authenticated %}
-        Hi <strong><a style="text-transform: capitalize;" href="">{{ user.username }}</a></strong>.
-        {% else %}
-        Not signed in.
-        {% endif %}
-      </div>
     </div>
     <hr>
     {% block body %}

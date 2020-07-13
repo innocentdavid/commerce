@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  padding: auto 15%!important;
+}
 
 nav {
   font-size: 35px;
