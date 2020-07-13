@@ -20,7 +20,7 @@
     </h3>
   </header>
   <main>
-    <div class="d-flex" style="justify-content: space-between; align-items: center; ">
+    <div class="d-flex" style="justify-content: space-between; align-items: center;">
       <div style="text-align: center; ">
         {% if user.is_authenticated %}
         Hi <strong><a style="text-transform: capitalize;" href="">{{ user.username }}</a></strong>.
@@ -54,6 +54,7 @@
         </li>
         {% endif %}
       </ul>
+      <span class="menu"><i class="fa fa-bars" style="cursor: pointer; font-size: 2rem;"></i></span>
     </div>
     <hr>
     {% block body %}

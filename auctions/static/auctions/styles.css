@@ -4,11 +4,13 @@
   box-sizing: border-box;
 }
 body{
-  padding: auto 15%!important;
+  background: #e9ecef;
 }
-
 nav {
   font-size: 35px;
+}
+.nav{
+  display: none;
 }
 .nav .badge {
   background: #1793FF;
@@ -28,7 +30,14 @@ header {
 main {
   padding: 10px;
 }
-
+@media (min-width: 992px){
+  .menu{
+    display: none;
+  }
+  .nav{
+    display: flex;
+  }
+}
 @media (min-width: 767px) {
   header {
     height: 7vh;
