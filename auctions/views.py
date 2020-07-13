@@ -5,11 +5,13 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import User
+from .models import *
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    listings = Listing.objects.all()
+    context = {'listings':listings}
+    return render(request, "auctions/index.html", context)
 
 
 def login_view(request):
@@ -78,4 +80,4 @@ def watchlist(request):
 
 @login_required(login_url='/login')
 def createListing(request):
-    return render(request, "auctions/createListing.html")    
+    return render(request, "auctions/createListing.html")

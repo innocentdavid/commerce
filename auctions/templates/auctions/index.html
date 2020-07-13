@@ -4,36 +4,38 @@
 <div class="jumbotron" style="padding: 10%; padding-top: 2%; background: white;">
     <div class="conttainer-fluid">
         <h2 style="margin: 0 0 3% 0;">Active Listings</h2>
+        {% for listing in listings %}
         <div class="row">
+            {% if listing.item.img_url %}
             <div class="col-md-5">
-                <a href="listing?q=TITLE"><img src="https://cdn.mos.cms.futurecdn.net/ezKNonZhQxu2KXuHPq9cj7-970-80.jpg" alt="Dell XPS 13 (2020)" width="100%" height="100%"></a>
+                <a href="listing?q={{ listing.item.title }}"><img src="{{ listing.item.img_url }}" alt="Dell XPS 13 (2020)" width="100%" height="100%"></a>
             </div>
+            {% endif %}
             <div class="col-md-7">
                 <ul style="padding-left: 20px; list-style-type: none; line-height: 2rem;">
                     <li>
-                        <a href="listing?q=TITLE"><h3>Dell XPS 13 (2020)</h3></a>
+                        <a href="listing?q={{ listing.item.title }}"><h3>{{ listing.item.title }}</h3></a>
                     </li>
                     <li>
-                        <h5>$7,000.00</h5>
+                        <h5>${{ listing.starting_bid|floatformat:2 }}</h5>
                     </li>
                     <li>
                         <p>
-                            Descrption: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia pariatur id
-                            sapiente natus similique perspiciatis eius consectetur cum cupiditate ex odit, perferendis
-                            commodi ratione tempora voluptatem suscipit eos soluta eligendi.
+                            {{ listing.item.description }}
                         </p>
                     </li>
                     <li>
                         Total Bids:
                         <span class="badge" style=" background: #1793FF; color: white;"> 39</span>  &nbsp;&nbsp;&nbsp; 
-                        <a href="listing?q=TITLE" class="btn-sm btn-danger">Bid Now!</a>
+                        <a href="listing?q={{ listing.item.title }}" class="btn-sm btn-danger">Bid Now!</a>
                     </li>
                 </ul>
             </div>
         </div>
         <hr>
         <br>
-        <div class="row">
+        {% endfor %}
+        <!-- <div class="row">
             <div class="col-md-7">
                 <ul style="padding-left: 20px; list-style-type: none; line-height: 2rem;">
                     <li>
@@ -58,7 +60,7 @@
             </div>
             <div class="col-md-4"></div>
         </div>
-        <hr>
+        <hr> -->
     </div>
 </div>
 {% endblock %}
