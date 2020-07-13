@@ -1,0 +1,50 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-7"><center><h2>Listing TITLE</h2></center></div>
+    </div>
+</div>
+<br>
+<div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
+    <div class="conttainer-fluid">
+        <div class="row">
+            <div class="col-12 order-1">
+                <a href="listing?q=TITLE"><img src="https://cdn.mos.cms.futurecdn.net/ezKNonZhQxu2KXuHPq9cj7-970-80.jpg" alt="Dell XPS 13 (2020)" width="100%" height="100%"></a>
+            </div>
+            <div class="col-12 order-2">
+                <ul style="padding-left: 20px; list-style-type: none; line-height: 2rem;">
+                    <li>
+                        <a href="listing?q=TITLE"><h3>Dell XPS 13 (2020)</h3></a>
+                    </li>
+                    <li>
+                        <h5>$7,000.00</h5>
+                    </li>
+                    <li>
+                        <p>
+                            Descrption: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia pariatur id
+                            sapiente natus similique perspiciatis eius consectetur cum cupiditate ex odit, perferendis
+                            commodi ratione tempora voluptatem suscipit eos soluta eligendi.
+                        </p>
+                    </li>
+                    <li>
+                        Total Bids:
+                        <span class="badge" style=" background: #1793FF; color: white;"> 39</span>  &nbsp;&nbsp;&nbsp; 
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="bid">Your bid will be the current bid</label>
+                                <input type="text" name="bid" id="bid" class="form-control" />
+                            </div>
+                            <a href="listing?q=TITLE" class="btn-sm btn-danger">Bid Now!</a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <br>
+    </div>
+</div>
+{% endblock %}
