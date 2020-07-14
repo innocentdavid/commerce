@@ -2,132 +2,140 @@
 
 {% block body %}
 <div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
-    <div class="conttainer-fluid">
-        <div style="display: flex; justify-content: center; align-items: center;"><h1>{{ msg | safe }}</h1></div>
-        {% for listing in listings %}
-        <div class="row">
-            {% if listing.item.img_url %}
-            <div class="col-12 order-1" style="margin-bottom: 5%;">
-                <a href="listing?q={{ listing.id }}"><img src="{{ listing.item.img_url }}" width="100%" height="100%"></a>
-            </div>
-            {% endif %}
-            <div class="col-12 order-2">
-                <ul style="padding-left: 20px; list-style-type: none; line-height: 2rem;">
-                    <li>
-                        <a href="listing?q={{ listing.id }}">
-                            <h3 style="display: inline;">{{ listing }}</h3>
-                        </a>
-                        {% if listing.author == request.user %}
-                        <a href="/" class="btn-sm btn-danger" style="cursor: pointer;">Close</a>
-                        {% endif %}
-                    </li>
-                    <li>
-                        <h5>Current Bid ${{ listing.current_bid |floatformat:2 }}</h5>
-                    </li>
-                    <li>
-                        Total Bids:
-                        <span class="badge" style=" background: #1793FF; color: white;"> 39</span> &nbsp;&nbsp;&nbsp;
-                        <hr>
-
-                        <!-- {% if listing.status == 'close' %} -->
-                        <div class="container-fluid" style="width: 100%;">
-                            <ul><a href="/">
-                                    <!-- <li class="btn-danger" style="border-radius: 5px; text-align: center;">CLOSED !</li> -->
-                                </a>
-                            </ul>
-                        </div>
-                        <!-- {% endif %} -->
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="wishlist" id="wishlistInp" value="TITLE">
-                            <div class="form-group">
-                                <label for="bid">Your bid will be the current bid</label>
-                                <!-- min below will be the current bid -->
-                                <input type="number" min="{{ current_bid | floatformat:2 }}" step="0.01" name="bid" id="bidInp" class="form-control"
-                                    placeholder="Bid" required />
-                            </div>
-                            {% if user.is_authenticated %}
-                            <button type="submit" id="bidBtn" class="btn btn-danger">Bid Now!</button>
-                            &nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-warning" id="addWatchlistBtn">Add to Watchlist</button>
-                            <!-- <button class="btn btn-warning" id="removeWatchlistBtn">Remove from Watchlist</button> -->
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn-sm btn-danger">Please Login/Register!</a>
-                            {% endif %}
-                        </form>
-                    </li>
-                    <br>
-                    <li class="btn-primary" style="border-radius: 5px;">Details</li>
-                    <li>
-                        {% for author in author %}
-                        <div>Listed By <i class="fa fa-angle-double-right"></i> <strong style="text-transform: capitalize;">{{ author.username }}</strong></div>
-                        {% endfor %}
-                        <div>Category <i class="fa fa-angle-double-right"></i> <a href="category?q={{ listing.item.category.id}}">{{ listing.item.category }}</a></div>
-                        <div>Listed on <i class="fa fa-angle-double-right"></i> {{ listing.item.date }}</div>
-                        <hr>
-                    </li>
-                    <li>
-                        <div><strong>Descrption &nbsp; <i class="fa fa-angle-double-right"></i></strong></div>
-                        <hr>
-                        <p style="text-align: justify;">
-                            {{ listing.item.description }}
-                        </p>
-                        <hr>
-                    </li>
-                    <br>
-                    <li>
-                        <div class="container" style="padding-left: 3rem;">
-                            <h4>Comment</h4>
-                            <form action="" id="commentForm" method="POST" onsubmit="return false">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <textarea name="comment" id="" style="width: 100%; height: 100%;"
-                                        class="form-control"></textarea>
-                                </div>
-                                {% if user.is_authenticated %}
-                                <button type="submit" class="btn btn-success">comment</button>
-                                {% else %}
-                                <a href="{% url 'login' %}" class="btn-sm btn-danger">Please Login/Register!</a>
-                                {% endif %}
-                            </form>
-                        </div>
-                        <hr>
-                        <div class="container-fluid">
-                            <strong>Total comments <span class="badge">50</span></strong>
-                            <div class="row mb-3">
-                                <div class="col-3 col-md-2"
-                                    style="position: relative; width:100%; height:auto; border-right:1px solid black; background-color: white; ">
-                                    <div class="" style="position:absolute; top:5%; left: 30%; width:40%; height:60%;">
-                                        <img src="/static/auctions/images/default.jpg" alt="d-img" width="100%" />
-                                    </div>
-                                    <div class="text-center"
-                                        style="position: absolute; bottom: 5%; left:0%; width:100%;">
-                                        Paul Innocent
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class=""
-                                        style=" height:auto; margin-top: 0px; overflow-wrap:break-words; overflow-y: auto;">
-                                        <p class="comment-box" style="padding:7px;">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet id quos
-                                            consequatur ratione molestiae. Enim, odio incidunt. Exercitationem modi,
-                                            iste laboriosam, a architecto inventore assumenda perspiciatis asperiores,
-                                            veniam veritatis cum.
-                                        </p>
-                                    </div>
-                                    <div class="d-flex" style="justify-content:flex-end;">
-                                        <span>28-06-2020(12:33)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <br>
-        {% endfor %}
+  <div class="conttainer-fluid">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <h1>{{ msg | safe }}</h1>
     </div>
+    {% for listing in listings %}
+    <div class="row">
+      {% if listing.item.img_url %}
+      <div class="col-12 order-1" style="margin-bottom: 5%;">
+        <a href="listing?q={{ listing.id }}"><img src="{{ listing.item.img_url }}" width="100%" height="100%"></a>
+      </div>
+      {% endif %}
+      <div class="col-12 order-2">
+        <ul style="padding-left: 20px; list-style-type: none; line-height: 2rem;">
+          <li>
+            <a href="listing?q={{ listing.id }}">
+              <h3 style="display: inline;">{{ listing }}</h3>
+            </a>
+            {% if listing.author == request.user %}
+            <a href="/" class="btn-sm btn-danger" style="cursor: pointer;">Close</a>
+            {% endif %}
+          </li>
+          <li>
+            <h5>Current Bid ${{ listing.current_bid |floatformat:2 }}</h5>
+          </li>
+          <li>
+            Total Bids:
+            <span class="badge" style=" background: #1793FF; color: white;"> 39</span> &nbsp;&nbsp;&nbsp;
+            <hr>
+
+            <!-- {% if listing.status == 'close' %} -->
+            <div class="container-fluid" style="width: 100%;">
+              <ul>
+                <a href="/">
+                  <!-- <li class="btn-danger" style="border-radius: 5px; text-align: center;">CLOSED !</li> -->
+                </a>
+              </ul>
+            </div>
+            <!-- {% endif %} -->
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="wishlist" id="wishlistInp" value="TITLE">
+              <div class="form-group">
+                <label for="bid">Your bid will be the current bid</label>
+                <!-- min below will be the current bid -->
+                <input type="number" min="{{ current_bid | floatformat:2 }}" step="0.01" name="bid" id="bidInp" class="form-control"
+                placeholder="Bid" required />
+              </div>
+              {% if user.is_authenticated %}
+              <button type="submit" id="bidBtn" class="btn btn-danger">Bid Now!</button>
+              &nbsp;&nbsp;&nbsp;
+              <button class="btn btn-warning" id="addWatchlistBtn">Add to Watchlist</button>
+              <!-- <button class="btn btn-warning" id="removeWatchlistBtn">Remove from Watchlist</button> -->
+              {% else %}
+              <a href="{% url 'login' %}" class="btn-sm btn-danger">Please Login/Register!</a>
+              {% endif %}
+            </form>
+          </li>
+          <br>
+          <li class="btn-primary" style="border-radius: 5px;">Details</li>
+          <li>
+            {% for author in author %}
+            <div>
+              Listed By <i class="fa fa-angle-double-right"></i> <strong style="text-transform: capitalize;">{{ author.username }}</strong>
+            </div>
+            {% endfor %}
+            <div>
+              Category <i class="fa fa-angle-double-right"></i> <a href="category?q={{ listing.item.category.id}}">{{ listing.item.category }}</a>
+            </div>
+            <div>
+              Listed on <i class="fa fa-angle-double-right"></i> {{ listing.item.date }}
+            </div>
+            <hr>
+          </li>
+          <li>
+            <div>
+              <strong>Descrption &nbsp; <i class="fa fa-angle-double-right"></i></strong>
+            </div>
+            <hr>
+            <p style="text-align: justify;">
+              {{ listing.item.description }}
+            </p>
+            <hr>
+          </li>
+          <br>
+          <li>
+            <div class="container" style="padding-left: 0;">
+              <h4>Comment</h4>
+              <form action="" id="commentForm" method="POST" onsubmit="return false">
+                {% csrf_token %}
+                <div class="form-group">
+                  <textarea name="comment" id="" style="width: 100%; height: 100%;"
+                    class="form-control"></textarea>
+                </div>
+                {% if user.is_authenticated %}
+                <button type="submit" class="btn btn-success">comment</button>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn-sm btn-danger">Please Login/Register!</a>
+                {% endif %}
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="container-fluid" style="margin-top:-50px; background-color:white;">
+  <strong>Total comments <span class="badge">50</span></strong>
+  <div class="row mb-3">
+    <div class="col-3 col-md-2"
+      style="position: relative; width:100%; height:auto; border-right:1px solid black; background-color: white; ">
+      <div class="" style="position:absolute; top:5%; left: 30%; width:40%; height:60%;">
+        <img src="/static/auctions/images/default.jpg" alt="d-img" width="100%" />
+      </div>
+      <div class="text-center"
+        style="position: absolute; bottom: 5%; left:0%; width:100%;">
+        Paul Innocent
+      </div>
+    </div>
+    <div class="col">
+      <div class=""
+        style=" height:auto; margin-top: 0px; overflow-wrap:break-words; overflow-y: auto;">
+        <p class="comment-box" style="padding:7px;">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet id quos
+          consequatur ratione molestiae. Enim, odio incidunt. Exercitationem modi,
+          iste laboriosam, a architecto inventore assumenda perspiciatis asperiores,
+          veniam veritatis cum.
+        </p>
+      </div>
+      <div class="d-flex" style="justify-content:flex-end;">
+        <span>28-06-2020(12:33)</span>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
