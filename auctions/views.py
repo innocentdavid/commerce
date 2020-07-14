@@ -74,13 +74,11 @@ def categories(request):
     return render(request, "auctions/categories.html", context)
 
 def category(request):
-    #if request.GET['']:
-        #return HttpResponseRedirect(reverse("index")) 
+    if not request.GET['q']:
+        return HttpResponseRedirect(reverse("index"))
+
     category = request.GET['q']
-    print(category)
-    #if not category :
-        #return HttpResponseRedirect(reverse("index"))
-    listings = Item.objects.get(category=1)
+    listings = Item.objects.filter(category=category)
     print(listings)
     context = {'listings': listings}
     return render(request, "auctions/category.html", context)

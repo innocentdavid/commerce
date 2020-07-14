@@ -6,8 +6,8 @@
     <h2>ALL LISTINGS</h2>
     <ul class="all_catg">
       {% for listing in listings  %}
-      <a href="listing?q={{ listing.listing}}">
-        <li>{{ listing.listing}}</li>
+      <a href="listing?q={{ listing}}">
+        <li>{{ listing }}</li>
       </a>
       {% endfor %}
     </ul>
