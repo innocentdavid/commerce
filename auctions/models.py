@@ -33,8 +33,8 @@ class Listing(models.Model):
 
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    item = models.ForeignKey(Listing, on_delete=models.CASCADE, null=True, blank=True)
-    bid = models.IntegerField(default=0, null=False, blank=False)
+    item = models.OneToOneField(Listing, on_delete=models.CASCADE, null=True, blank=True)
+    bid = models.FloatField(default=0, null=False, blank=False)
     dateTime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

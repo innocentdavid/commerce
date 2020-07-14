@@ -66,8 +66,13 @@ def register(request):
 
 @login_required(login_url='/login')
 def listing(request):
-    if not request.GET:
-        return HttpResponseRedirect(reverse("index"))
+    if request.POST:
+        if request.POST['bid']:
+            bid = float(request.POST['bid']) + 0.6
+            newBid = Bid.objects.create(user=request.user, item=Listing.objects.get(item=1), bid=bid)
+            newBid.id
+            context = {'msg': f'You Have successufully bidded this item for ${bid} with addition of VAT of $0.60 <a href="/">Go back</a>'}
+            return render(request, "auctions/listing.html", context)
 
     id = request.GET['q']
     listings = Listing.objects.filter(item=id)
@@ -83,6 +88,7 @@ def listing(request):
             'current_bid': current_bid
         }
         return render(request, "auctions/listing.html", context)
+        
 
 def categories(request):
     categories = Category.objects.all()
@@ -106,4 +112,13 @@ def watchlist(request):
 def createListing(request):
     return render(request, "auctions/createListing.html")
 
-# def action(request):
+def bid(request):
+    if request.GET:
+        return HttpResponseRedirect(reverse("index"))
+    
+    if request.POST['bid']:
+        bid = request.POST['bid']
+        bidder = request.user
+        newBid = Bid(user=bidder, item=1, bid=bid)
+        newBid.save()
+        newBid.id

@@ -3,6 +3,7 @@
 {% block body %}
 <div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
     <div class="conttainer-fluid">
+        <div style="display: flex; justify-content: center; align-items: center;"><h1>{{ msg | safe }}</h1></div>
         {% for listing in listings %}
         <div class="row">
             {% if listing.item.img_url %}
