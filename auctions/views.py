@@ -69,10 +69,21 @@ def listing(request):
     return render(request, "auctions/listing.html")
 
 def categories(request):
-    return render(request, "auctions/categories.html")
+    categories = Category.objects.all()
+    context = {'categories': categories}
+    return render(request, "auctions/categories.html", context)
 
 def category(request):
-    return render(request, "auctions/category.html")
+    #if request.GET['']:
+        #return HttpResponseRedirect(reverse("index")) 
+    category = request.GET['q']
+    print(category)
+    #if not category :
+        #return HttpResponseRedirect(reverse("index"))
+    listings = Item.objects.get(category=1)
+    print(listings)
+    context = {'listings': listings}
+    return render(request, "auctions/category.html", context)
 
 @login_required(login_url='/login')
 def watchlist(request):

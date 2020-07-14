@@ -2,13 +2,15 @@
 
 {% block body %}
 <div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
-<div>
+  <div>
     <h2>ALL LISTINGS</h2>
     <ul class="all_catg">
-        <a href="listing?q=TITLE"><li>Listing 1</li></a>
-        <a href="listing?q=TITLE"><li>Listing 2</li></a>
-        <a href="listing?q=TITLE"><li>Listing 3</li></a>
+      {% for listing in listings  %}
+      <a href="listing?q={{ listing.listing}}">
+        <li>{{ listing.listing}}</li>
+      </a>
+      {% endfor %}
     </ul>
-</div>
+  </div>
 </div>
 {% endblock %}
