@@ -66,7 +66,23 @@ def register(request):
 
 @login_required(login_url='/login')
 def listing(request):
-    return render(request, "auctions/listing.html")
+    if not request.GET:
+        return HttpResponseRedirect(reverse("index"))
+
+    id = request.GET['q']
+    listings = Listing.objects.filter(item=id)
+    for listing in listings:
+        # for min value of bid input field
+        current_bid = listing.current_bid + 1
+
+        author = User.objects.filter(username=listing.author)
+
+        context = {
+            'listings': listings,
+            'author': author,
+            'current_bid': current_bid
+        }
+        return render(request, "auctions/listing.html", context)
 
 def categories(request):
     categories = Category.objects.all()
@@ -79,7 +95,6 @@ def category(request):
 
     category = request.GET['q']
     listings = Item.objects.filter(category=category)
-    print(listings)
     context = {'listings': listings}
     return render(request, "auctions/category.html", context)
 
@@ -90,3 +105,5 @@ def watchlist(request):
 @login_required(login_url='/login')
 def createListing(request):
     return render(request, "auctions/createListing.html")
+
+# def action(request):

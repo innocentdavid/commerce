@@ -11,7 +11,7 @@
           <img src="{{ listing.img_url }}" alt="{{ listing }}" style="width: 100%; font-size:.5rem;" />
         </div>
         <div class="col-8">
-          <a href="listing?q={{ listing }}"><h3>{{ listing }}</h3></a>
+          <a href="listing?q={{ listing.id }}"><h3>{{ listing }}</h3></a>
         </div>
       </div>
       {% empty %}
