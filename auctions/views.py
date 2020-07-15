@@ -69,23 +69,37 @@ def listing(request):
     if request.POST:
         if request.POST['bid']:
             bid = float(request.POST['bid']) + 0.6
-            newBid = Bid.objects.create(user=request.user, item=Listing.objects.get(item=1), bid=bid)
-            newBid.id
-            context = {'msg': f'You Have successufully bidded this item for ${bid} with addition of VAT of $0.60 <a href="/">Go back</a>'}
+            itemId = request.POST['itemId']
+
+            p = Listing.objects.get(item=itemId)
+            p.current_bid = bid
+            p.save(update_fields=['current_bid'])
+
+            try:
+                p = Bid.objects.get(item=itemId, user=User.objects.get(username=request.user))
+                p.bid = bid
+                p.save(update_fields=['bid']) # or p.save() to save all
+            except Bid.DoesNotExist:
+                Bid.objects.create(user=request.user, item=Listing.objects.get(item=itemId), bid=bid)
+                
+            context = {'msg': f'You Have successufully bidded this item for ${ bid } (VAT $0.60) <a href="listing?q={itemId}">Go back</a>'}
             return render(request, "auctions/listing.html", context)
 
     id = request.GET['q']
     listings = Listing.objects.filter(item=id)
+    
     for listing in listings:
+    
         # for min value of bid input field
         current_bid = listing.current_bid + 1
-
+        print (listing.current_bid)
         author = User.objects.filter(username=listing.author)
 
         context = {
             'listings': listings,
             'author': author,
-            'current_bid': current_bid
+            'current_bid': current_bid,
+            'itemId': id
         }
         return render(request, "auctions/listing.html", context)
         

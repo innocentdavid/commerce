@@ -48,6 +48,7 @@
                 <!-- min below will be the current bid -->
                 <input type="number" min="{{ current_bid | floatformat:2 }}" step="0.01" name="bid" id="bidInp" class="form-control"
                 placeholder="Bid" required />
+                <input type="hidden" name="itemId" value="{{ itemId }}">
               </div>
               {% if user.is_authenticated %}
               <button type="submit" id="bidBtn" class="btn btn-danger">Bid Now!</button>
