@@ -12,7 +12,7 @@
         </div>
         <div class="col-4">
           {% if listing.status == 'open' %}
-          <a href="listing?q={{ listing.id }}"><h3>{{ listing }}</h3></a>
+          <a href="listing?q={{ listing.item.id }}"><h3>{{ listing }}</h3></a>
           {% else %}
           <span><h3>{{ listing }}</h3></span>
           {% endif %}

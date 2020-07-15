@@ -94,6 +94,23 @@ def watchlist(request):
 
 @login_required(login_url='/login')
 def createListing(request):
+    if request.POST:
+        # item = Item.objects.filter(title=request.POST['title'])
+        # if item:``
+        #     print(item)
+        #     context = {'msg': 'This item is already listed'}
+        #     return HttpResponseRedirect("myListings", context)
+
+        catg = Category.objects.get(pk=request.POST['category'])
+        newItem = Item(title=request.POST['title'], description=request.POST['description'], category=catg, img_url=request.POST['imgUrl'])
+        newItem.save()
+        newItemId = newItem.id
+
+        newList = Listing(author=request.user, item=Item.objects.get(pk=newItemId), current_bid=request.POST['sbid'])
+        newList.save()
+
+        return HttpResponseRedirect("myListings")
+
     categories = Category.objects.all()
 
     context = {'createlistingpage': 'active', 'categories':categories}
@@ -121,7 +138,7 @@ def myListings(request):
 def listing(request):
     if request.POST:
         if request.POST['bid']:
-            bid = float(request.POST['bid']) + 0.6
+            bid = float(request.POST['bid'])
             itemId = request.POST['itemId']
 
             p = Listing.objects.get(item=itemId)
@@ -138,7 +155,7 @@ def listing(request):
                     user=request.user, item=Listing.objects.get(item=itemId), bid=bid)
 
             context = {
-                'msg': f'You Have successufully bidded this item for ${ bid } (VAT $0.60) <a href="listing?q={itemId}">Go back</a>'}
+                'msg': f'You Have successufully bidded this item for ${ bid } <a href="listing?q={itemId}">Go back</a>'}
             return render(request, "auctions/listing.html", context)
 
     id = request.GET['q']
