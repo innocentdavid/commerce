@@ -11,5 +11,7 @@ urlpatterns = [
     path("watchlist", views.watchlist, name="watchlist"),
     path("createListing", views.createListing, name="createListing"),
     path("categories", views.categories, name="categories"),
-    path("category", views.category, name="category")
+    path("category", views.category, name="category"),
+    path("myListings", views.myListings, name="myListings"),
+    path("closeL", views.closeL, name="closeL")
 ]

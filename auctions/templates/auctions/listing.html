@@ -10,7 +10,7 @@
     <div class="row">
       {% if listing.item.img_url %}
       <div class="col-12 order-1" style="margin-bottom: 5%;">
-        <a href="listing?q={{ listing.id }}"><img src="{{ listing.item.img_url }}" width="100%" height="100%"></a>
+        <a href="listing?q={{ listing.item.id }}"><img src="{{ listing.item.img_url }}" width="100%" height="100%"></a>
       </div>
       {% endif %}
       <div class="col-12 order-2">
@@ -20,7 +20,13 @@
               <h3 style="display: inline;">{{ listing }}</h3>
             </a>
             {% if listing.author == request.user %}
-            <a href="/" class="btn-sm btn-danger" style="cursor: pointer;">Close</a>
+            {% if listing.status == 'open' %}
+            <form action="closeL" method="post" id="closeBid" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="Lid" id="id" value="{{ listing.item.id }}">
+              <button type="submit" class="btn-sm btn-danger" >Close</button>
+            </form>
+            {% endif %}
             {% endif %}
           </li>
           <li>
@@ -31,15 +37,17 @@
             <span class="badge" style=" background: #1793FF; color: white;"> 39</span> &nbsp;&nbsp;&nbsp;
             <hr>
 
-            <!-- {% if listing.status == 'close' %} -->
+            {% if listing.status == 'close' %}
             <div class="container-fluid" style="width: 100%;">
               <ul>
                 <a href="/">
-                  <!-- <li class="btn-danger" style="border-radius: 5px; text-align: center;">CLOSED !</li> -->
+                  <li class="btn-danger" style="border-radius: 5px; text-align: center;">CLOSED !</li>
                 </a>
               </ul>
             </div>
-            <!-- {% endif %} -->
+
+            {% else %}
+
             <form action="" method="post">
               {% csrf_token %}
               <input type="hidden" name="wishlist" id="wishlistInp" value="TITLE">
@@ -59,6 +67,7 @@
               <a href="{% url 'login' %}" class="btn-sm btn-danger">Please Login/Register!</a>
               {% endif %}
             </form>
+            {% endif %}
           </li>
           <br>
           <li class="btn-primary" style="border-radius: 5px;">Details</li>

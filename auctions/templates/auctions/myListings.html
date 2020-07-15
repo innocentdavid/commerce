@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="jumbotron" style="padding: 13%; padding-top: 2%; background: white;">
+  <div>
+    <h2>MY LISTINGS</h2>
+    <div class="container">
+      {% for listing in listings  %}
+      <div class="row">
+        <div class="col-3">
+          <img src="{{ listing.img_url }}" alt="{{ listing }}" style="width: 100%; font-size:.5rem;" />
+        </div>
+        <div class="col-4">
+          {% if listing.status == 'open' %}
+          <a href="listing?q={{ listing.id }}"><h3>{{ listing }}</h3></a>
+          {% else %}
+          <span><h3>{{ listing }}</h3></span>
+          {% endif %}
+        </div>
+        <div class="col-3">
+          {% if listing.status == 'open' %}
+          <span class="btn btn-success">Status: OPEN</span>
+          {% else %}
+          <span class="btn btn-danger">Status: CLOSED</span>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <ul>
+        <li>You have not listed any item yet! <a href="{% url 'createListing' %}"><h3>List one now!</h3></a></li>
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

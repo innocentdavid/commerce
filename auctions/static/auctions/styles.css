@@ -12,6 +12,30 @@ nav {
   font-size: 35px;
 }
 
+.nav{
+  margin-top: 7px;
+}
+
+.nav li{
+  border-radius: 10px;
+  transition: .5s ease-in-out;
+}
+
+.nav li.active{
+  background: rgb(148, 146, 146);
+}
+
+.nav li.active a{
+  color: white;
+}
+
+.nav li:hover {
+  background: black;
+}
+.nav li:hover a {
+  color: white;
+}
+
 .nav .badge {
   background: #1793FF;
   color: white;

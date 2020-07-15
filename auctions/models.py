@@ -25,7 +25,7 @@ class Item(models.Model):
 class Listing(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     item  = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, blank=True)
-    starting_bid = models.IntegerField()
+    status = models.CharField(max_length=4, null=False, blank=False, default='open')
     current_bid = models.FloatField()
     
     def __str__(self):

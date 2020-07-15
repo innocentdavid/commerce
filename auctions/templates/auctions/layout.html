@@ -12,6 +12,7 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <script type="text/javascript">     window.CSRF_TOKEN = "{{ csrf_token }}"; </script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{% static 'auctions/script.js' %}"></script>
 </head>
@@ -28,7 +29,7 @@
       <div class="d-flex" style="justify-content: space-between; align-items: center; background: #eee; padding: 0 10px;">
         <div style="text-align: center; ">
           {% if user.is_authenticated %}
-          Hi <strong><a style="text-transform: capitalize;" href="/">{{ user.username }}</a></strong>.
+          <h4>Hi <strong><a style="text-transform: capitalize;" href="/">{{ user.username }}</a></strong></h4>
           {% else %}
           Not signed in.
           {% endif %}
@@ -36,27 +37,30 @@
         <div class="navb">
           <i class="toggle">+</i>
           <ul class="nav">
-            <li class="nav-item">
+            <li class="nav-item {{ homepage }}">
               <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{ catgspage }}">
               <a class="nav-link" href="{% url 'categories' %}">Categories</a>
             </li>
             {% if user.is_authenticated %}
-            <li class="nav-item">
+            <li class="nav-item {{ watchlistpage }}">
               <a class="nav-link" href="{% url 'watchlist' %}">WatchList<span class="badge">6</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{ createlistingpage }}">
               <a class="nav-link" href="{% url 'createListing' %}">Create Listing</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{ mylistingpage }}">
+              <a class="nav-link" href="{% url 'myListings' %}">My Listings</a>
+            </li>
+            <li class="nav-item {{ logoutpage }}">
               <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
             </li>
             {% else %}
-            <li class="nav-item">
+            <li class="nav-item {{ loginpage }}">
               <a class="nav-link" href="{% url 'login' %}">Log In</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{ regpage }}">
               <a class="nav-link" href="{% url 'register' %}">Register</a>
             </li>
             {% endif %}
