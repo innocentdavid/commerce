@@ -31,10 +31,6 @@ header {
   color: white;
 }
 
-main {
-  padding: 10px;
-}
-
 @media (max-width: 766px) {
   .navb {
     display: none;

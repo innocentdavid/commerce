@@ -51,7 +51,7 @@
                 <input type="hidden" name="itemId" value="{{ itemId }}">
               </div>
               {% if user.is_authenticated %}
-              <button type="submit" id="bidBtn" class="btn btn-danger">Bid Now!</button>
+              <button type="submit" id="bidBtn" class="btn btn-danger" style="margin-bottom: 10px;">Bid Now!</button>
               &nbsp;&nbsp;&nbsp;
               <button class="btn btn-warning" id="addWatchlistBtn">Add to Watchlist</button>
               <!-- <button class="btn btn-warning" id="removeWatchlistBtn">Remove from Watchlist</button> -->
@@ -110,7 +110,7 @@
     {% endfor %}
   </div>
 </div>
-<div class="container-fluid" style="margin-top:-50px; background-color:white;">
+<div class="container-fluid" style="margin-top:-80px; margin-bottom: 5rem; background-color:white;">
   <strong>Total comments <span class="badge">50</span></strong>
   <div class="row mb-3">
     <div class="col-3 col-md-2"

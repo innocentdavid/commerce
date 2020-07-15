@@ -2,67 +2,74 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset=utf-8>
   <meta name=description content="">
   <meta name=viewport content="width=device-width, initial-scale=1">
   <title>{% block title %}Auctions{% endblock %}</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{% static 'auctions/script.js' %}"></script>
 </head>
+
 <body>
   <div class="e_msgCont"><span class="e_msg">{{ msg }}</span></div>
-  <header>
-    <h3 style="text-align: center;">
-      <small>e</small><span>AUCTION WITH DJANGO</span>
-    </h3>
-  </header>
-  <main>
-    <div class="d-flex" style="justify-content: space-between; align-items: center;">
-      <div style="text-align: center; ">
-        {% if user.is_authenticated %}
-        Hi <strong><a style="text-transform: capitalize;" href="/">{{ user.username }}</a></strong>.
-        {% else %}
-        Not signed in.
-        {% endif %}
-      </div>
-      <div class="navb">
-        <i class="toggle">+</i>
-        <ul  class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'categories' %}">Categories</a>
-          </li>
+  <div class="navbarFixed" style="position: fixed; width: 100%; z-index: 5;">
+    <header>
+      <h3 style="text-align: center;">
+        <small>e</small><span>AUCTION WITH DJANGO</span>
+      </h3>
+    </header>
+    <main>
+      <div class="d-flex" style="justify-content: space-between; align-items: center; background: #eee; padding: 0 10px;">
+        <div style="text-align: center; ">
           {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'watchlist' %}">WatchList<span class="badge">6</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'createListing' %}">Create Listing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-          </li>
+          Hi <strong><a style="text-transform: capitalize;" href="/">{{ user.username }}</a></strong>.
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Log In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
-          </li>
+          Not signed in.
           {% endif %}
-        </ul>
+        </div>
+        <div class="navb">
+          <i class="toggle">+</i>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'watchlist' %}">WatchList<span class="badge">6</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'createListing' %}">Create Listing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        <span class="menu"><i class="fa fa-bars" style="cursor: pointer; font-size: 2rem;"></i></span>
       </div>
-      <span class="menu"><i class="fa fa-bars" style="cursor: pointer; font-size: 2rem;"></i></span>
-    </div>
-    <hr>
-    {% block body %}
-    {% endblock %}
-  </main>
+    </main>
+  </div>
+  <div style="padding-top: 6rem;">
+  {% block body %}
+  {% endblock %}
+  </div>
 </body>
+
 </html>
