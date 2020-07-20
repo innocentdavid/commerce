@@ -49,7 +49,8 @@ class Watchlist(models.Model):
         return str(self.item)
 
 class Comment(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.SET_NULL, null=True, blank=True)
+    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     comment = models.TextField(null=True, blank=False)
     dateTime = models.DateTimeField(auto_now_add=True)
 

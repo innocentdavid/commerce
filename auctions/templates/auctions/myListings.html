@@ -3,21 +3,17 @@
 {% block body %}
 <div class="jumbotron" style="padding: 13%; padding-top: 2%; background: white;">
   <div>
-    <h2>MY LISTINGS</h2>
+    <h1 style="padding-left: 5%;">MY LISTINGS</h1>
+    <br>
     <div class="container">
       {% for listing in listings  %}
-      <div class="row">
-        <div class="col-3">
-          <img src="{{ listing.img_url }}" alt="{{ listing }}" style="width: 100%; font-size:.5rem;" />
+      <div class="row m-2">
+        <div class="col-6">
+          <ul>
+            <li><a href="listing?q={{ listing.item.id }}"><h3>{{ listing }}</h3></a></li>
+          </ul>
         </div>
-        <div class="col-4">
-          {% if listing.status == 'open' %}
-          <a href="listing?q={{ listing.item.id }}"><h3>{{ listing }}</h3></a>
-          {% else %}
-          <span><h3>{{ listing }}</h3></span>
-          {% endif %}
-        </div>
-        <div class="col-3">
+        <div class="col">
           {% if listing.status == 'open' %}
           <span class="btn btn-success">Status: OPEN</span>
           {% else %}

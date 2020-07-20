@@ -3,17 +3,13 @@
 {% block body %}
 <div class="jumbotron" style="padding: 15%; padding-top: 2%; background: white;">
   <div>
-    <h2>ALL LISTINGS</h2>
+    <center><h1>{{ category }}</h1></center>
+    <br>
     <div class="container">
       {% for listing in listings  %}
-      <div class="row">
-        <div class="col-4">
-          <img src="{{ listing.img_url }}" alt="{{ listing }}" style="width: 100%; font-size:.5rem;" />
-        </div>
-        <div class="col-8">
-          <a href="listing?q={{ listing.id }}"><h3>{{ listing }}</h3></a>
-        </div>
-      </div>
+      <ul>
+        <li><a href="listing?q={{ listing.id }}"><h3>{{ listing }}</h3></a></li>
+      </ul>
       {% empty %}
       <ul>
         <li>No Listing under this category yet ! <a href="{% url 'createListing' %}"><h3>Create one</h3></a></li>

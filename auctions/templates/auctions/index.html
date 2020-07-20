@@ -38,39 +38,5 @@
     </div>
 
     <br>
-
-    <div class="conttainer-fluid">
-        <h2 style="margin: 0 0 3% 0;">Closed Listings</h2>
-        {% for listing in listingsB %}
-        <div class="row">
-            {% if listing.item.img_url %}
-            <div class="col-md-5">
-                <a href="listing?q={{ listing.item.id }}"><img src="{{ listing.item.img_url }}" alt="Dell XPS 13 (2020)" width="100%" height="100%"></a>
-            </div>
-            {% endif %}
-            <div class="col-md-7">
-                <ul style="padding-left: 20px; list-style-type: none; line-height: 2rem;">
-                    <li>
-                        <a href="listing?q={{ listing.item.id }}"><h3>{{ listing.item.title }}</h3></a>
-                    </li>
-                    <li>
-                        <h5>${{ listing.current_bid|floatformat:2 }}</h5>
-                    </li>
-                    <li>
-                        <p>
-                            {{ listing.item.description }}
-                        </p>
-                    </li>
-                    <li>
-                        Total Bids:
-                        <span class="badge" style=" background: #1793FF; color: white;"> 39</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <br>
-        {% endfor %}
-    </div>
 </div>
 {% endblock %}
