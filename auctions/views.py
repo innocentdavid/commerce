@@ -229,12 +229,12 @@ def listing(request):
     # bid winner
     bid_winner = ''
     res = Bid.objects.filter(item=item)
-    bw = [b.user for b in res][-1]
-    if bw == request.user:
-        bid_winner = 'You'
-    else:
-        bid_winner = bw
-
+    if res:
+        bw = [b.user for b in res][-1]
+        if bw == request.user:
+            bid_winner = 'You'
+        else:
+            bid_winner = bw
 
     # Total comments
     total_comments = Comment.objects.filter(item=id).count()
