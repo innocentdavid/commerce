@@ -9,7 +9,7 @@ from .models import *
 
 
 def index(request):
-    listings = Listing.objects.filter(status='open')
+    listings = Listing.objects.filter(status='open').order_by('-pk')
     context = {'listings': listings, 'homepage': 'active'}
     return render(request, "auctions/index.html", context)
 
@@ -234,6 +234,7 @@ def listing(request):
         bid_winner = 'You'
     else:
         bid_winner = bw
+
 
     # Total comments
     total_comments = Comment.objects.filter(item=id).count()
