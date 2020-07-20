@@ -232,9 +232,9 @@ def listing(request):
     if res:
         bw = [b.user for b in res][-1]
         if bw == request.user:
-            bid_winner = 'You'
+            bid_winner = '<em><strong style="text-transform: capitalize;">You have won this auction !</strong></em>'
         else:
-            bid_winner = bw
+            bid_winner = f'<em><strong>The winner of the Auction is {bw} !</strong></em>'
 
     # Total comments
     total_comments = Comment.objects.filter(item=id).count()
